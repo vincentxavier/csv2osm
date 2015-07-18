@@ -26,7 +26,7 @@ def print_osm_xml(reader, lat, lon, valid_tags):
 
 
 def print_tags(row, lat, lon, valid_tags):
-    for k, v in row.iteritems():
+    for k, v in enumerate(row):
         if k != lat and k != lon and v != '' and k in valid_tags:
             if k == 'name':
                 print('    <tag k="%s" v="%s" />' % (k,v.lower().capitalize()))
@@ -43,6 +43,6 @@ if __name__ == '__main__':
 
     valid_tags = ['name',
                 'id',]
-    with open(sys.argv[1], 'rb') as csv_file:
+    with open(sys.argv[1], 'r') as csv_file:
         reader = csv.DictReader(csv_file, delimiter=',')
         print_osm_xml(reader, 'lat', 'lon', valid_tags)
